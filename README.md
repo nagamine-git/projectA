@@ -1,3 +1,5 @@
+## 準備
+
 ```bash
 # docker起動
 docker-compose up
@@ -8,9 +10,9 @@ docker-compose exec web bash
 ## アプリの作り方
 
 ```bash
-# アプリディレクトリまで移動
+# つくる
 create-nuxt-app hogehoge
-# ディレクトリ移動&npm install
+# ディレクトリ移動 & npm install
 cd hogehoge && npm install
 ```
 
