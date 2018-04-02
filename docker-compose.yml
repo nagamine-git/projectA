@@ -1,0 +1,12 @@
+version: "3"
+services: 
+  web:
+    build: 
+      context: ./web/
+    privileged: true
+    volumes:
+      - "./web:/var/www/html"
+    ports:
+      - 80:80
+      - 3000:3000
+    container_name: "nuxt"
