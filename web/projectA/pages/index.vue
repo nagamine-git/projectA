@@ -1,36 +1,50 @@
 <template>
-  <div>
-    <add-box />
-    <v-layout row class="space-top">
-      <v-flex xs6 sm6 md6 class="space-right">
-          <story-list v-for="story in stories" v-bind:key="story"/>
-      </v-flex>
-      <v-flex xs6 sm6 md6 class="space-right">
+  <v-content>
+    <v-container>
+      <nav-bar />
+      <side-bar />
+      <add-box />
+      <v-layout row class="space-top-x2">
+        <story-list class="space-right-x2" />
         <story-detail />
-      </v-flex>
-    </v-layout>
-  </div>
+      </v-layout>
+    </v-container>
+  </v-content>
 </template>
+
+<style>
+.space-bottom-x1 {
+  margin-bottom: 8px;
+}
+.space-right-x1 {
+  margin-right: 8px;
+}
+.space-top-x2 {
+  margin-top: 16px;
+}
+.space-right-x2 {
+  margin-right: 16px;
+}
+</style>
 
 <script>
 import AddBox from "~/components/AddBox.vue";
 import StoryList from "~/components/StoryList.vue";
 import StoryDetail from "~/components/StoryDetail.vue";
+import NavBar from "~/components/NavBar.vue";
+import SideBar from "~/components/SideBar.vue";
 
 export default {
   components: {
     AddBox,
     StoryList,
-    StoryDetail
+    StoryDetail,
+    NavBar,
+    SideBar
   },
   data: function() {
-    return {
-      stories: [
-        { name: "1" },
-        { name: "2" },
-        { name: "3" }
-      ]
-    };
-  }
+    return {};
+  },
+  methods: {}
 };
 </script>

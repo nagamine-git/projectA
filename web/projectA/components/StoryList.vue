@@ -1,27 +1,26 @@
 <template>
 
-<v-card class="space-top">
-  <v-container>
-    <v-text-field
-    name="input-1"
-    label="開発を円滑に進めるため"
-    id="testing"
-    value="モックを作成する"
-    ></v-text-field>
-  </v-container>
-</v-card>
+<v-flex xs6 sm6 md6 class="space-right">
+  <draggable v-model="stories" @start="drag=true" @end="drag=false">
+    <v-text-field solo v-model="story.name" v-for="story in stories" v-bind:key="story['id']" class="space-bottom-x1" />
+  </draggable>
+</v-flex>
 
 </template>
 
-
-<style>
-.space-top {
-  margin-top: 10px;
-}
-</style>
-
 <script>
+import draggable from "~/node_modules/vuedraggable/dist/vuedraggable.js";
 export default {
-  props: ["story"],
+  components: {
+    draggable
+  },
+  data: function() {
+    return {
+      stories: [
+        { id: 1, name: "モックを作成する" },
+        { id: 2, name: "モックを作成する" }
+      ]
+    };
+  }
 };
 </script>

@@ -1,62 +1,87 @@
 <template>
 
-<v-card class="space-top">
-  <v-container>
-    <h3>条件</h3>
-    <v-checkbox v-model="x" value="コーディングに入れるレベルのモックを完成していること" label="コーディングに入れるレベルのモックを完成していること"></v-checkbox>
-    <br>
-    <h3>Todo</h3>
-    <v-list v-for="substory in substories" v-bind:key="substory">
-      <v-layout row>
-        <v-checkbox v-model="x" value="紙に書く" label="紙に書く"></v-checkbox>
-        <v-avatar
-          :tile="tile"
-          :size="avatarSize"
-          class="grey lighten-4"
-        />
+<v-flex xs6>
+  <v-card>
+    <v-container>
+      <h4>目的</h4>
+      <v-text-field v-model="story['purpose']"></v-text-field>
+      <h4>達成条件</h4>
+      <div v-for="goal in story['goals']" v-bind:key="goal['id']">
+        <v-layout align-center>
+          <v-text-field v-model="goal['name']"></v-text-field>
+          <v-checkbox :style="{'flex': 0,'margin-left': '5px'}" v-model="goal['done']" hide-details class="shrink mr-2" />
+        </v-layout>
+
+      <v-layout align-center>
       </v-layout>
-    </v-list>
-    <div class="text-lg-right">
-      <v-btn outline >タスクを追加する</v-btn>
-    </div>
-    <br>
-    <br>
-    <h3>備考</h3>
-    <v-text-field
-      name="input-7-1"
-      label="MarkDownで書けるようにしたい"
-      multi-line
-    ></v-text-field>
-    <div class="text-lg-right">
-      <v-btn outline >ストーリーを削除する</v-btn>
-    </div>
-  </v-container>
-</v-card>
+      </div>
+      <h4>Todo</h4>
+      <draggable v-model="tasks" @start="drag=true" @end="drag=false">
+        <v-list v-for="task in tasks" v-bind:key="task['id']">
+          <v-layout row align-center>
+            <v-text-field v-model="task['name']"></v-text-field>
+            <v-avatar :size="26+'px'" class="grey lighten-4">
+              <img src="https://avatars1.githubusercontent.com/u/33612116?s=180&u=f7ee215c53260782dc065d85327b3875e7c1ee6c&v=4" alt="avatar">
+            </v-avatar>
+            <v-btn flat icon color="grey darken-1" :style="{'margin-left': 0}">
+                <v-icon>check_box</v-icon>
+            </v-btn>
+          </v-layout>
+        </v-list>
+      </draggable>
+      <div class="text-lg-right">
+
+      <v-layout align-center>
+        <v-text-field></v-text-field>
+        <v-btn outline color="blue" >タスクを追加する</v-btn>
+      </v-layout>
+      </div>
+      <v-text-field
+      label="備考"
+      textarea
+      ></v-text-field>
+      <div class="text-lg-right">
+      <v-btn outline color="red">ストーリーを削除する</v-btn>
+      </div>
+    </v-container>
+  </v-card>
+</v-flex>
 
 </template>
 
-
-<style>
-.space-top {
-  margin-top: 10px;
-}
-.no-space-y {
-  padding: 0 5px;
-}
-.input-group__details {
-  min-height: 12px;
-}
-</style>
-
 <script>
+import draggable from "~/node_modules/vuedraggable/dist/vuedraggable.js";
 export default {
-  props: ["story"],
-  data: function (){
+  components: {
+    draggable
+  },
+  data: function() {
     return {
-      x: true,
-      avatarSize: '24px',
-      substories: [{text: "hoge"},{text: "hage"}]
-      }
-    }
+      avatarSize: "24px",
+      story: {
+        id: 1,
+        purpose: "円滑にプロダクトの開発を行うため",
+        goals: [
+          {
+            id: 1,
+            name: "コーディングに入れるレベルのモックを完成していること",
+            done: false
+          }
+        ]
+      },
+      tasks: [
+        {
+          id: 1,
+          name: "やること",
+          done: true
+        },
+        {
+          id: 2,
+          name: "やること",
+          done: true
+        }
+      ]
+    };
+  }
 };
 </script>
