@@ -51,10 +51,16 @@
 
 <script>
 import draggable from "~/node_modules/vuedraggable/dist/vuedraggable.js";
+import { mapState } from 'vuex';
 export default {
   components: {
     draggable
   },
+  computed: mapState({
+    tasks: function(state) {
+      return state.Tasks
+    }
+  }),
   data: function() {
     return {
       avatarSize: "24px",
@@ -68,19 +74,7 @@ export default {
             done: false
           }
         ]
-      },
-      tasks: [
-        {
-          id: 1,
-          name: "やること",
-          done: true
-        },
-        {
-          id: 2,
-          name: "やること",
-          done: true
-        }
-      ]
+      }
     };
   }
 };

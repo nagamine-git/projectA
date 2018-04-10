@@ -10,16 +10,18 @@
 
 <script>
 import draggable from "~/node_modules/vuedraggable/dist/vuedraggable.js";
+import { mapState } from 'vuex';
 export default {
   components: {
     draggable
   },
+  computed: mapState({
+    stories: function(state) {
+      return state.Stories
+    }
+  }),
   data: function() {
     return {
-      stories: [
-        { id: 1, name: "モックを作成する" },
-        { id: 2, name: "モックを作成する" }
-      ]
     };
   }
 };
