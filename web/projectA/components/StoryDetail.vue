@@ -17,7 +17,7 @@
       </div>
       <h4>Todo</h4>
       <draggable v-model="tasks" @start="drag=true" @end="drag=false">
-        <v-list v-for="task in tasks" v-bind:key="task['id']">
+        <v-list v-for="task in getTasksByStoryId(1)" v-bind:key="task['id']">
           <v-layout row align-center>
             <v-text-field v-model="task['name']"></v-text-field>
             <v-avatar :size="26+'px'" class="grey lighten-4">
@@ -51,16 +51,19 @@
 
 <script>
 import draggable from "~/node_modules/vuedraggable/dist/vuedraggable.js";
-import { mapState } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 export default {
   components: {
     draggable
   },
-  computed: mapState({
-    tasks: function(state) {
+  computed: {
+    ...mapState({
+    tasks: state => {
       return state.Tasks
-    }
-  }),
+    }}), ...mapGetters([
+      'getTasksByStoryId'
+    ])
+  },
   data: function() {
     return {
       avatarSize: "24px",

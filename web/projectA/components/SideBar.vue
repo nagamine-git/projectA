@@ -17,7 +17,6 @@
   </v-navigation-drawer>
 </template>
 
-
 <style>
 
 </style>

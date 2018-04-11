@@ -1,6 +1,6 @@
 import Vuex from 'vuex'
 
-const store = () => new Vuex.Store(
+export default () => new Vuex.Store(
   {
     state: {
       Stories:[
@@ -47,8 +47,11 @@ const store = () => new Vuex.Store(
           done: false
         },
       ]
+    },
+    getters: {
+      getTasksByStoryId: (state) => (strory_id) => {
+        return state.Tasks.filter((task) => task.story_id == strory_id)
+      }
     }
   }
 )
-
-export default store
