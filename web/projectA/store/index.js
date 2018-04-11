@@ -48,6 +48,12 @@ export default () => new Vuex.Store(
         },
       ]
     },
+    mutations: {
+      setTaskDone: (state, task_id) => {
+        const task = state.Tasks.find(task => task.id == task_id);
+        task.done = true;
+      }
+    },
     getters: {
       getTasksByStoryId: (state) => (strory_id) => {
         return state.Tasks.filter((task) => task.story_id == strory_id)

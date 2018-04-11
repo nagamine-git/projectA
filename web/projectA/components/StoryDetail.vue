@@ -23,9 +23,7 @@
             <v-avatar :size="26+'px'" class="grey lighten-4">
               <img src="https://avatars1.githubusercontent.com/u/33612116?s=180&u=f7ee215c53260782dc065d85327b3875e7c1ee6c&v=4" alt="avatar">
             </v-avatar>
-            <v-btn flat icon color="grey darken-1" :style="{'margin-left': 0}">
-                <v-icon>check_box</v-icon>
-            </v-btn>
+            <v-checkbox :style="{'flex': 0,'margin-left': '5px'}" v-model="task['done']" hide-details class="shrink mr-2" />
           </v-layout>
         </v-list>
       </draggable>
