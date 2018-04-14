@@ -24,9 +24,6 @@
 </template>
 
 <style>
-  .input-group.input-group--dirty.input-group--text-field.primary--text {
-      padding: 0.6em 0;
-  }
   .input-group__details {
     min-height: 0;
   }

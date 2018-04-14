@@ -87,12 +87,33 @@ export default () => new Vuex.Store(
           done: false
         }
       ],
-      CurrentStoryId: 0
+      CurrentStoryId: 0,
+      AddStory: {
+        name: null,
+        purpose: null,
+        conditions_name: null
+      }
     },
     mutations: {
       setTaskDone: (state, task_id) => {
         const task = state.Tasks.find(task => task.id == task_id);
         task.done = true;
+      },
+      addStory: (state, add_story) => {
+        let add_story_id = state.Stories.length + 1
+        state.Stories.push({id: add_story_id, name: add_story.name, purpose: add_story.purpose})
+        let add_conditions_ary = add_story.conditions_name.split(',')
+        for (let add_condition_name of add_conditions_ary) {
+          let set_condition = {id: null,story_id: add_story_id, name: null, done: false}
+          set_condition.name = add_condition_name
+          set_condition.id = state.Conditions.length + 1
+          state.Conditions.push(set_condition)
+        }
+        state.AddStory = {
+          name: null,
+          purpose: null,
+          conditions_name: null
+        }
       },
       setCurrentStory: (state, selected_story_id) => {
         state.CurrentStoryId = selected_story_id
