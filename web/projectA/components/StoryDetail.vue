@@ -10,8 +10,8 @@
         <story-detail-todo />
         <div class="text-lg-right">
         <v-layout align-center>
-          <v-text-field />
-          <v-btn outline color="blue" >タスクを追加する</v-btn>
+          <v-text-field v-model="add_task.name" />
+          <v-btn outline color="blue" @click="addTask(add_task)">タスクを追加する</v-btn>
         </v-layout>
         </div>
         <v-text-field v-model="story.detail" label="備考" textarea />
@@ -37,17 +37,25 @@
   import StoryDetailCondition from "~/components/StoryDetailCondition.vue";
   import StoryDetailTodo from "~/components/StoryDetailTodo.vue";
   import draggable from "~/node_modules/vuedraggable/dist/vuedraggable.js";
-  import { mapState, mapGetters } from 'vuex';
+  import { mapState, mapGetters, mapMutations } from 'vuex';
   export default {
     components: {
       draggable,
       StoryDetailCondition,
       StoryDetailTodo
     },
+    methods: {
+      ...mapMutations({
+        addTask: 'addTask'
+      })
+    },
     computed: {
       ...mapState({
         tasks: state => {
           return state.Tasks
+        },
+        add_task: state => {
+          return state.AddTask
         },
         current_story_id: state => {
           return state.CurrentStoryId

@@ -93,6 +93,9 @@ export default () => new Vuex.Store(
         purpose: null,
         conditions_name: null
       },
+      AddTask: {
+        name: null
+      },
       Errors: {
         no_name: {
           has_error: false,
@@ -147,6 +150,15 @@ export default () => new Vuex.Store(
           name: null,
           purpose: null,
           conditions_name: null
+        }
+      },
+      addTask: (state, add_task) => {
+        // 追加処理
+        let add_task_id = state.Tasks.length + 1
+        state.Tasks.push({id: add_task_id, story_id: state.CurrentStoryId, name: add_task.name, done: false})
+        // 初期化処理
+        state.AddTask = {
+          name: null
         }
       },
       setCurrentStory: (state, selected_story_id) => {
