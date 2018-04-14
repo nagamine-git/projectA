@@ -161,6 +161,18 @@ export default () => new Vuex.Store(
           name: null
         }
       },
+      deleteTask: (state, delete_task_id) => {
+        state.Tasks.some((v, i) => {
+          if (v.id == delete_task_id) state.Tasks.splice(i, 1); //id:3の要素を削除
+        });
+      },
+      deleteStory: (state, delete_story_id) => {
+        state.Stories.some((v, i) => {
+          if (v.id == delete_story_id) state.Stories.splice(i, 1); //id:3の要素を削除
+        });
+        state.CurrentStoryId = null
+      }
+      ,
       setCurrentStory: (state, selected_story_id) => {
         state.CurrentStoryId = selected_story_id
       }

@@ -3,11 +3,11 @@
     <v-card>
       <v-container v-if="story">
         <h4>目的</h4>
-        <v-text-field v-model="story.purpose"></v-text-field>
+        <v-text-field v-model="story.purpose" :class="{purpose_text : true}"></v-text-field>
         <h4>達成条件</h4>
-        <story-detail-condition/>
+        <story-detail-condition :class="{condition_text : true}" />
         <h4>Todo</h4>
-        <story-detail-todo />
+        <story-detail-todo :class="{todo_text : true}" />
         <div class="text-lg-right">
         <v-layout align-center>
           <v-text-field v-model="add_task.name" />
@@ -16,7 +16,7 @@
         </div>
         <v-text-field v-model="story.detail" label="備考" textarea />
         <div class="text-lg-right">
-          <v-btn outline color="red">ストーリーを削除する</v-btn>
+          <v-btn outline color="red" @click="deleteStory(story.id)">ストーリーを削除する</v-btn>
         </div>
       </v-container>
     </v-card>
@@ -24,14 +24,25 @@
 </template>
 
 <style>
+  h4 {
+    padding: 6px 0 0;
+  }
   .input-group__details {
     min-height: 0;
+  }
+  .todo_text ul div div {
+    padding: 0 0 4px;
+  }
+  .condition_text div div div {
+    padding: 0 0 4px;
+  }
+  .purpose_text {
+    padding: 0 0 4px;
   }
   ul.list {
       padding: 0em 0;
   }
 </style>
-
 
 <script>
   import StoryDetailCondition from "~/components/StoryDetailCondition.vue";
@@ -46,7 +57,8 @@
     },
     methods: {
       ...mapMutations({
-        addTask: 'addTask'
+        addTask: 'addTask',
+        deleteStory: 'deleteStory'
       })
     },
     computed: {
