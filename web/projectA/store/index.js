@@ -46,12 +46,16 @@ export default () => new Vuex.Store(
           name: 'タスク3つめ',
           done: false
         },
-      ]
+      ],
+      CurrentStoryId: 0
     },
     mutations: {
       setTaskDone: (state, task_id) => {
         const task = state.Tasks.find(task => task.id == task_id);
         task.done = true;
+      },
+      setCurrentStory: (state, selected_story_id) => {
+        state.CurrentStoryId = selected_story_id
       }
     },
     getters: {

@@ -17,7 +17,7 @@
       </div>
       <h4>Todo</h4>
       <draggable v-model="tasks" @start="drag=true" @end="drag=false">
-        <v-list v-for="task in getTasksByStoryId(1)" v-bind:key="task['id']">
+        <v-list v-for="task in getTasksByStoryId(current_story_id)" v-bind:key="task['id']">
           <v-layout row align-center>
             <v-text-field v-model="task['name']"></v-text-field>
             <v-avatar :size="26+'px'" class="grey lighten-4">
@@ -56,9 +56,14 @@ export default {
   },
   computed: {
     ...mapState({
-    tasks: state => {
-      return state.Tasks
-    }}), ...mapGetters([
+      tasks: state => {
+        return state.Tasks
+      },
+      current_story_id: state => {
+        return state.CurrentStoryId
+      }
+    }),
+     ...mapGetters([
       'getTasksByStoryId'
     ])
   },
