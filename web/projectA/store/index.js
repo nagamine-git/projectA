@@ -92,14 +92,45 @@ export default () => new Vuex.Store(
         name: null,
         purpose: null,
         conditions_name: null
+      },
+      Errors: {
+        no_name: {
+          has_error: false,
+          message: 'なにをするのか、入力してください'
+        },
+        no_purpose: {
+          has_error: false,
+          message: 'なぜするのか、入力してください'
+        },
+        no_conditions_name: {
+          has_error: false,
+          message: 'なにをクリアすれば達成なのか、入力してください'
+        }
       }
     },
     mutations: {
-      setTaskDone: (state, task_id) => {
-        const task = state.Tasks.find(task => task.id == task_id);
-        task.done = true;
-      },
       addStory: (state, add_story) => {
+        // 追加前バリデーションチェック
+        state.Errors.no_name.has_error = false
+        state.Errors.no_purpose.has_error = false
+        state.Errors.no_conditions_name.has_error = false
+        let error_flug = false
+        if (add_story.name == null) {
+          state.Errors.no_name.has_error = true
+          error_flug = true
+        }
+        if (add_story.purpose == null) {
+          state.Errors.no_purpose.has_error = true
+          error_flug = true
+        }
+        if (add_story.conditions_name == null) {
+          state.Errors.no_conditions_name.has_error = true
+          error_flug = true
+        }
+        if (error_flug == true) {
+          return
+        }
+        // 追加処理
         let add_story_id = state.Stories.length + 1
         state.Stories.push({id: add_story_id, name: add_story.name, purpose: add_story.purpose})
         let add_conditions_ary = add_story.conditions_name.split(',')
@@ -109,6 +140,9 @@ export default () => new Vuex.Store(
           set_condition.id = state.Conditions.length + 1
           state.Conditions.push(set_condition)
         }
+        // 追加したストーリーにフォーカス
+        state.CurrentStoryId = add_story_id
+        // 初期化処理
         state.AddStory = {
           name: null,
           purpose: null,
