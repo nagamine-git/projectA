@@ -134,11 +134,11 @@ export default () => new Vuex.Store(
           return
         }
         // 追加処理
-        let add_story_id = state.Stories.length + 1
+        const add_story_id = state.Stories.length + 1
         state.Stories.push({id: add_story_id, name: add_story.name, purpose: add_story.purpose})
-        let add_conditions_ary = add_story.conditions_name.split(',')
-        for (let add_condition_name of add_conditions_ary) {
-          let set_condition = {id: null,story_id: add_story_id, name: null, done: false}
+        const add_conditions_ary = add_story.conditions_name.split(',')
+        for (const add_condition_name of add_conditions_ary) {
+          const set_condition = {id: null,story_id: add_story_id, name: null, done: false}
           set_condition.name = add_condition_name
           set_condition.id = state.Conditions.length + 1
           state.Conditions.push(set_condition)
@@ -154,7 +154,7 @@ export default () => new Vuex.Store(
       },
       addTask: (state, add_task) => {
         // 追加処理
-        let add_task_id = state.Tasks.length + 1
+        const add_task_id = state.Tasks.length + 1
         state.Tasks.push({id: add_task_id, story_id: state.CurrentStoryId, name: add_task.name, done: false})
         // 初期化処理
         state.AddTask = {
