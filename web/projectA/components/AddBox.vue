@@ -10,7 +10,7 @@
           v-model="add_story.name"
           :error=errors.no_name.has_error
           />
-          </v-flex>
+        </v-flex>
         <v-flex xs4 sm4 md4 class="space-right-x1">
           <v-text-field
           name="purpose"
