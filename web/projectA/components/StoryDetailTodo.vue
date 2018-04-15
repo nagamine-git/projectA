@@ -1,6 +1,6 @@
 <template>
   <draggable v-model="tasks" @start="drag=true" @end="drag=false">
-    <v-list v-for="task in getTasksByStoryId(current_story_id)" v-bind:key="task['id']">
+    <v-list v-for="task in getTasksByStoryId(current_story_id)" :key="task['id']">
       <v-layout row align-center>
         <v-text-field v-model="task['name']"></v-text-field>
         <v-btn flat icon color="red" @click="deleteTask(task['id'])">
@@ -21,12 +21,8 @@
     },
     computed: {
       ...mapState({
-        tasks: state => {
-          return state.Tasks
-        },
-        current_story_id: state => {
-          return state.CurrentStoryId
-        }
+        tasks: state => state.Tasks,
+        current_story_id: state => state.CurrentStoryId
       }),
       ...mapGetters([
         'getTasksByStoryId'
