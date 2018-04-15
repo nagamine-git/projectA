@@ -18,12 +18,8 @@
     },
     computed: {
       ...mapState({
-        conditions: state => {
-          return state.Conditions
-        },
-        current_story_id: state => {
-          return state.CurrentStoryId
-        }
+        conditions: state => state.Conditions,
+        current_story_id: state => state.CurrentStoryId
       }),
       ...mapGetters([
         'getConditionsByStoryId'

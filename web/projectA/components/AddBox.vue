@@ -44,12 +44,8 @@
     },
     computed: {
       ...mapState({
-        add_story: state => {
-          return state.AddStory
-        },
-        errors: state => {
-          return state.Errors
-        }
+        add_story: state => state.AddStory,
+        errors: state => state.Errors,
       })
     }
   };

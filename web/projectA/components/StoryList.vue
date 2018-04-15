@@ -14,9 +14,7 @@
       draggable
     },
     computed: mapState({
-      stories: function(state) {
-        return state.Stories
-      }
+      stories: state => state.Stories
     }),
     methods: {
       ...mapMutations({

@@ -63,15 +63,9 @@
     },
     computed: {
       ...mapState({
-        tasks: state => {
-          return state.Tasks
-        },
-        add_task: state => {
-          return state.AddTask
-        },
-        current_story_id: state => {
-          return state.CurrentStoryId
-        },
+        tasks: state => state.Tasks,
+        add_task: state => state.AddTask,
+        current_story_id: state => state.CurrentStoryId,
         story: state => {
           let story = state.Stories.find((story) => story.id == state.CurrentStoryId)
           return story ? story : ''

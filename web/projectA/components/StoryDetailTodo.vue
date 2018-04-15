@@ -21,12 +21,8 @@
     },
     computed: {
       ...mapState({
-        tasks: state => {
-          return state.Tasks
-        },
-        current_story_id: state => {
-          return state.CurrentStoryId
-        }
+        tasks: state => state.Tasks,
+        current_story_id: state => state.CurrentStoryId
       }),
       ...mapGetters([
         'getTasksByStoryId'
