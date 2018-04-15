@@ -1,87 +1,79 @@
 <template>
-
-<v-flex xs6>
-  <v-card>
-    <v-container>
-      <h4>目的</h4>
-      <v-text-field v-model="story['purpose']"></v-text-field>
-      <h4>達成条件</h4>
-      <div v-for="goal in story['goals']" v-bind:key="goal['id']">
+  <v-flex xs6>
+    <v-card>
+      <v-container v-if="story">
+        <h4>目的</h4>
+        <v-text-field v-model="story.purpose" :class="{purpose_text : true}"></v-text-field>
+        <h4>達成条件</h4>
+        <story-detail-condition :class="{condition_text : true}" />
+        <h4>Todo</h4>
+        <story-detail-todo :class="{todo_text : true}" />
+        <div class="text-lg-right">
         <v-layout align-center>
-          <v-text-field v-model="goal['name']"></v-text-field>
-          <v-checkbox :style="{'flex': 0,'margin-left': '5px'}" v-model="goal['done']" hide-details class="shrink mr-2" />
+          <v-text-field v-model="add_task.name" />
+          <v-btn outline color="blue" @click="addTask(add_task)">タスクを追加する</v-btn>
         </v-layout>
-
-      <v-layout align-center>
-      </v-layout>
-      </div>
-      <h4>Todo</h4>
-      <draggable v-model="tasks" @start="drag=true" @end="drag=false">
-        <v-list v-for="task in tasks" v-bind:key="task['id']">
-          <v-layout row align-center>
-            <v-text-field v-model="task['name']"></v-text-field>
-            <v-avatar :size="26+'px'" class="grey lighten-4">
-              <img src="https://avatars1.githubusercontent.com/u/33612116?s=180&u=f7ee215c53260782dc065d85327b3875e7c1ee6c&v=4" alt="avatar">
-            </v-avatar>
-            <v-btn flat icon color="grey darken-1" :style="{'margin-left': 0}">
-                <v-icon>check_box</v-icon>
-            </v-btn>
-          </v-layout>
-        </v-list>
-      </draggable>
-      <div class="text-lg-right">
-
-      <v-layout align-center>
-        <v-text-field></v-text-field>
-        <v-btn outline color="blue" >タスクを追加する</v-btn>
-      </v-layout>
-      </div>
-      <v-text-field
-      label="備考"
-      textarea
-      ></v-text-field>
-      <div class="text-lg-right">
-      <v-btn outline color="red">ストーリーを削除する</v-btn>
-      </div>
-    </v-container>
-  </v-card>
-</v-flex>
-
+        </div>
+        <v-text-field v-model="story.detail" label="備考" textarea />
+        <div class="text-lg-right">
+          <v-btn outline color="red" @click="deleteStory(story.id)">ストーリーを削除する</v-btn>
+        </div>
+      </v-container>
+    </v-card>
+  </v-flex>
 </template>
 
-<script>
-import draggable from "~/node_modules/vuedraggable/dist/vuedraggable.js";
-export default {
-  components: {
-    draggable
-  },
-  data: function() {
-    return {
-      avatarSize: "24px",
-      story: {
-        id: 1,
-        purpose: "円滑にプロダクトの開発を行うため",
-        goals: [
-          {
-            id: 1,
-            name: "コーディングに入れるレベルのモックを完成していること",
-            done: false
-          }
-        ]
-      },
-      tasks: [
-        {
-          id: 1,
-          name: "やること",
-          done: true
-        },
-        {
-          id: 2,
-          name: "やること",
-          done: true
-        }
-      ]
-    };
+<style>
+  h4 {
+    padding: 6px 0 0;
   }
-};
+  .input-group__details {
+    min-height: 0;
+  }
+  .todo_text ul div div {
+    padding: 0 0 4px;
+  }
+  .condition_text div div div {
+    padding: 0 0 4px;
+  }
+  .purpose_text {
+    padding: 0 0 4px;
+  }
+  ul.list {
+      padding: 0em 0;
+  }
+</style>
+
+<script>
+  import StoryDetailCondition from "~/components/StoryDetailCondition.vue";
+  import StoryDetailTodo from "~/components/StoryDetailTodo.vue";
+  import draggable from "~/node_modules/vuedraggable/dist/vuedraggable.js";
+  import { mapState, mapGetters, mapMutations } from 'vuex';
+  export default {
+    components: {
+      draggable,
+      StoryDetailCondition,
+      StoryDetailTodo
+    },
+    methods: {
+      ...mapMutations({
+        addTask: 'addTask',
+        deleteStory: 'deleteStory'
+      })
+    },
+    computed: {
+      ...mapState({
+        tasks: state => state.Tasks,
+        add_task: state => state.AddTask,
+        current_story_id: state => state.CurrentStoryId,
+        story: state => {
+          const story = state.Stories.find((story) => story.id == state.CurrentStoryId)
+          return story ? story : ''
+        }
+      }),
+      ...mapGetters([
+        'getTasksByStoryId',
+      ])
+    }
+  };
 </script>

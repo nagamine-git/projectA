@@ -6,11 +6,3 @@
     <v-icon>more_vert</v-icon>
   </v-toolbar>
 </template>
-
-<script>
-export default {
-  data: function() {
-    return {};
-  }
-};
-</script>

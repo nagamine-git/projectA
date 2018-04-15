@@ -17,22 +17,17 @@
   </v-navigation-drawer>
 </template>
 
-
-<style>
-
-</style>
-
 <script>
-import draggable from "~/node_modules/vuedraggable/dist/vuedraggable.js";
-export default {
-  components: {
-    draggable
-  },
-  data: function() {
-    return {
-      projectArrey: [{ id: 1, name: "ProjectA" }, { id: 2, name: "ProjectB" }],
-      drawer: true
-    };
-  }
-};
+  import draggable from "~/node_modules/vuedraggable/dist/vuedraggable.js";
+  export default {
+    components: {
+      draggable
+    },
+    data: function() {
+      return {
+        projectArrey: [{ id: 1, name: "ProjectA" }, { id: 2, name: "ProjectB" }],
+        drawer: true
+      };
+    }
+  };
 </script>
