@@ -22,7 +22,7 @@ export default {
     }
     // 追加処理
     const add_story_id = state.Stories.length + 1
-    state.Stories.push({id: add_story_id, name: add_story.name, purpose: add_story.purpose})
+    state.Stories.push({id: add_story_id, name: add_story.name, purpose: add_story.purpose, is_delete: false})
     const add_conditions_ary = add_story.conditions_name.split(',')
     for (const add_condition_name of add_conditions_ary) {
       const set_condition = {id: null, story_id: add_story_id, name: null, done: false}
@@ -54,9 +54,8 @@ export default {
     });
   },
   deleteStory: (state, delete_story_id) => {
-    state.Stories.some((v, i) => {
-      if (v.id == delete_story_id) state.Stories.splice(i, 1); //id:3の要素を削除
-    });
+    const story = state.Stories.find((story) => story.id == delete_story_id)
+    story.is_delete = true;
     state.CurrentStoryId = null
   }
   ,
