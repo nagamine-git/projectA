@@ -10,13 +10,15 @@ export default () => new Vuex.Store(
           id: 1 ,
           name: '[4/15]ProjectAにて、ローカルのJSONファイルを使ってCRUDができるようにしたい',
           purpose: 'ユーザーの候補がデモを使うことで、実際にProjectAを使っている状況が想像できるようにするためだ。',
-          detail: 'https://hackmd.io/kSYc87e7RKCEFaZrZjyuMQ?view'
+          detail: 'https://hackmd.io/kSYc87e7RKCEFaZrZjyuMQ?view',
+          is_delete: false
         },
         {
           id: 2 ,
           name: '[4/15]ProjectAにて、タスク・目的・達成条件をサジェストする機能を実装したい',
           purpose: 'ユーザーの候補がデモを使うことで、実際にProjectAを使っている状況が想像できるようにするためだ。',
-          detail: ''
+          detail: '',
+          is_delete: false
         }
       ],
       Tasks:[
